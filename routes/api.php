@@ -18,7 +18,7 @@ use App\Http\Controllers\TipoController;
 */
 Route::resource('tipo',TipoController::class);
 Route::post('gasto',[GastosController::class,'store']);
-Route::get('/expenses/search', [GastosController::class, 'searchByDate']);
+Route::post('search', [TipoController::class, 'searchByDate']);
 Route::get('gasto/tipo',[TipoController::class, 'listaUser']);
 
 Route::get('mostrar',[TipoController::class, 'mostrar']);

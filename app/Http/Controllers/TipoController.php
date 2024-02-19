@@ -89,6 +89,20 @@ class TipoController extends Controller
         return response (['tipos'=>$tipos],200);
     }
 
+    public function searchByDate(Request $request)
+    {
+        $request->validate([
+            'fecha' => 'required|date',
+        ]);
 
+        $fecha = $request->input('fecha');
+
+        $gastos = DB::table('tipos')
+        ->whereDate('fecha', $fecha)
+        ->join('gastos','tipos.id','=','gastos.tipo_id')
+        ->select('gastos.descripcion', 'gastos.monto','gastos.fecha','tipos.tipo')
+        ->get();
+        return response (['tipos'=>$gastos],200);
+    }
         
 }

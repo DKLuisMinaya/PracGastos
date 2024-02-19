@@ -6,6 +6,7 @@ use App\Models\Gastos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 class GastosController extends Controller
 {
     /**
@@ -91,17 +92,5 @@ class GastosController extends Controller
     }
 
     
-    public function searchByDate(Request $request)
-    {
-        $request->validate([
-            'fecha' => 'required|date',
-            
-        ]);
-
-        $gastos = Gastos::with('type')
-            ->whereBetween('Fecha de transaccion', [$request->fecha])
-            ->get();
-
-        return response()->json(['gastos' => $gastos], 200);
-    }
+    
 }
